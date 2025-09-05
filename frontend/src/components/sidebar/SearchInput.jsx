@@ -16,26 +16,36 @@ const SearchInput = () => {
 			return toast.error("Search term must be at least 3 characters long");
 		}
 
-		const conversation = conversations.find((c) => c.fullName.toLowerCase().includes(search.toLowerCase()));
+		const conversation = conversations.find((c) =>
+			c.fullName.toLowerCase().includes(search.toLowerCase())
+		);
 
 		if (conversation) {
 			setSelectedConversation(conversation);
 			setSearch("");
 		} else toast.error("No such user found!");
 	};
+
 	return (
-		<form onSubmit={handleSubmit} className='flex items-center gap-2'>
+		<form
+			onSubmit={handleSubmit}
+			className="flex items-center gap-2 w-full bg-gray-800 rounded-full p-2"
+		>
 			<input
-				type='text'
-				placeholder='Search…'
-				className='input input-bordered rounded-full'
+				type="text"
+				placeholder="Search…"
+				className="flex-1 bg-gray-800 text-white placeholder-gray-400 rounded-full px-4 py-2 focus:outline-none focus:ring-2 focus:ring-sky-500"
 				value={search}
 				onChange={(e) => setSearch(e.target.value)}
 			/>
-			<button type='submit' className='btn btn-circle bg-sky-500 text-white'>
-				<IoSearchSharp className='w-6 h-6 outline-none' />
+			<button
+				type="submit"
+				className="bg-sky-500 hover:bg-sky-600 text-white rounded-full p-2 transition-colors"
+			>
+				<IoSearchSharp className="w-5 h-5" />
 			</button>
 		</form>
 	);
 };
+
 export default SearchInput;
