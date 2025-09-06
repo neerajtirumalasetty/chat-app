@@ -16,7 +16,11 @@ const Messages = () => {
 	}, [messages]);
 
 	return (
-		<div className='px-4 flex-1 overflow-auto'>
+		<div style={{
+			padding: '0 16px',
+			flex: 1,
+			overflow: 'auto'
+		}}>
 			{!loading &&
 				messages.length > 0 &&
 				messages.map((message) => (
@@ -27,7 +31,14 @@ const Messages = () => {
 
 			{loading && [...Array(3)].map((_, idx) => <MessageSkeleton key={idx} />)}
 			{!loading && messages.length === 0 && (
-				<p className='text-center'>Send a message to start the conversation</p>
+				<p style={{
+					textAlign: 'center',
+					color: 'rgba(255,255,255,0.6)',
+					fontSize: '14px',
+					margin: '40px 0'
+				}}>
+					Send a message to start the conversation
+				</p>
 			)}
 		</div>
 	);

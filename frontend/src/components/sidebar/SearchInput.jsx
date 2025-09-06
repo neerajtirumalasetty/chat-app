@@ -29,20 +29,55 @@ const SearchInput = () => {
 	return (
 		<form
 			onSubmit={handleSubmit}
-			className="flex items-center gap-2 w-full bg-gray-800 rounded-full p-2"
+			style={{
+				display: 'flex',
+				alignItems: 'center',
+				gap: '8px',
+				width: '100%',
+				backgroundColor: 'rgba(31, 41, 55, 0.8)',
+				borderRadius: '12px',
+				padding: '8px',
+				border: '1px solid rgba(255,255,255,0.1)'
+			}}
 		>
 			<input
 				type="text"
 				placeholder="Search…"
-				className="flex-1 bg-gray-800 text-white placeholder-gray-400 rounded-full px-4 py-2 focus:outline-none focus:ring-2 focus:ring-sky-500"
+				style={{
+					flex: 1,
+					backgroundColor: 'transparent',
+					color: 'white',
+					border: 'none',
+					outline: 'none',
+					padding: '8px 12px',
+					fontSize: '14px',
+					borderRadius: '8px'
+				}}
 				value={search}
 				onChange={(e) => setSearch(e.target.value)}
 			/>
 			<button
 				type="submit"
-				className="bg-sky-500 hover:bg-sky-600 text-white rounded-full p-2 transition-colors"
+				style={{
+					backgroundColor: '#3b82f6',
+					color: 'white',
+					border: 'none',
+					borderRadius: '8px',
+					padding: '8px',
+					cursor: 'pointer',
+					transition: 'all 0.2s ease',
+					display: 'flex',
+					alignItems: 'center',
+					justifyContent: 'center'
+				}}
+				onMouseEnter={(e) => {
+					e.target.style.backgroundColor = '#2563eb';
+				}}
+				onMouseLeave={(e) => {
+					e.target.style.backgroundColor = '#3b82f6';
+				}}
 			>
-				<IoSearchSharp className="w-5 h-5" />
+				<IoSearchSharp style={{ fontSize: '16px' }} />
 			</button>
 		</form>
 	);

@@ -12,31 +12,88 @@ const Conversation = ({ conversation, lastIdx, emoji }) => {
 		<>
 			<div
 				onClick={() => setSelectedConversation(conversation)}
-				className={`flex gap-3 items-center p-2 rounded-lg cursor-pointer transition-colors duration-200
-					${isSelected ? "bg-sky-600" : "hover:bg-sky-500"}
-				`}
+				style={{
+					display: 'flex',
+					gap: '12px',
+					alignItems: 'center',
+					padding: '12px',
+					borderRadius: '12px',
+					cursor: 'pointer',
+					transition: 'all 0.2s ease',
+					backgroundColor: isSelected ? 'rgba(59, 130, 246, 0.3)' : 'transparent',
+					border: isSelected ? '1px solid rgba(59, 130, 246, 0.5)' : '1px solid transparent'
+				}}
+				onMouseEnter={(e) => {
+					if (!isSelected) {
+						e.target.style.backgroundColor = 'rgba(255,255,255,0.05)';
+					}
+				}}
+				onMouseLeave={(e) => {
+					if (!isSelected) {
+						e.target.style.backgroundColor = 'transparent';
+					}
+				}}
 			>
-				<div className="relative">
+				<div style={{ position: 'relative' }}>
 					<img
 						src={conversation.profilePic}
 						alt="user avatar"
-						className="w-12 h-12 rounded-full object-cover"
+						style={{
+							width: '40px',
+							height: '40px',
+							borderRadius: '50%',
+							objectFit: 'cover'
+						}}
 					/>
 					{isOnline && (
-						<span className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 border-2 border-gray-900 rounded-full"></span>
+						<span style={{
+							position: 'absolute',
+							bottom: '0',
+							right: '0',
+							width: '12px',
+							height: '12px',
+							backgroundColor: '#10b981',
+							border: '2px solid #1f2937',
+							borderRadius: '50%'
+						}}></span>
 					)}
 				</div>
 
-				<div className="flex flex-col flex-1">
-					<div className="flex justify-between items-center">
-						<p className="font-semibold text-gray-200">{conversation.fullName}</p>
-						<span className="text-xl">{emoji}</span>
+				<div style={{
+					display: 'flex',
+					flexDirection: 'column',
+					flex: 1,
+					minWidth: 0
+				}}>
+					<div style={{
+						display: 'flex',
+						justifyContent: 'space-between',
+						alignItems: 'center'
+					}}>
+						<p style={{
+							fontWeight: '600',
+							color: 'white',
+							margin: 0,
+							fontSize: '14px',
+							overflow: 'hidden',
+							textOverflow: 'ellipsis',
+							whiteSpace: 'nowrap'
+						}}>
+							{conversation.fullName}
+						</p>
+						<span style={{ fontSize: '16px' }}>{emoji}</span>
 					</div>
 				</div>
 			</div>
 
 			{/* Divider between conversations */}
-			{!lastIdx && <div className="border-b border-gray-700 my-1" />}
+			{!lastIdx && (
+				<div style={{
+					height: '1px',
+					backgroundColor: 'rgba(255,255,255,0.1)',
+					margin: '8px 0'
+				}} />
+			)}
 		</>
 	);
 };

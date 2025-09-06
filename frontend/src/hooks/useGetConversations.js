@@ -9,7 +9,12 @@ const useGetConversations = () => {
 		const getConversations = async () => {
 			setLoading(true);
 			try {
-				const res = await fetch("/api/users");
+				const token = JSON.parse(localStorage.getItem("chat-user"))?.token;
+				const res = await fetch("/api/users", {
+					headers: {
+						"Authorization": `Bearer ${token}`,
+					},
+				});
 				const data = await res.json();
 				if (data.error) {
 					throw new Error(data.error);

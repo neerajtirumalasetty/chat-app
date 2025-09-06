@@ -1,83 +1,239 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import useLogin from "../../hooks/useLogin.js";
 
 const Login = () => {
   const [form, setForm] = useState({
     username: "",
     password: "",
   });
+  const [errors, setErrors] = useState({});
+  const { loading, login } = useLogin();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
+    // Clear error when user starts typing
+    if (errors[name]) {
+      setErrors((prev) => ({ ...prev, [name]: "" }));
+    }
   };
 
-  const handleSubmit = (e) => {
+  const validateForm = () => {
+    const newErrors = {};
+    
+    if (!form.username.trim()) {
+      newErrors.username = "Username is required";
+    }
+    
+    if (!form.password) {
+      newErrors.password = "Password is required";
+    }
+    
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Add your login logic here
-    console.log(form);
+    
+    if (!validateForm()) {
+      return;
+    }
+    
+    await login(form.username, form.password);
   };
 
   return (
-    <div className="flex min-h-screen bg-black">
-      {/* Left: Form section */}
-      <div className="flex flex-col justify-center items-center w-full md:w-1/2 px-8 md:px-16 py-12">
-        <div className="w-full max-w-md">
-          <h1 className="text-4xl font-bold text-white mb-10 text-center">Login</h1>
+    <div style={{ 
+      minHeight: '100vh', 
+      display: 'flex', 
+      alignItems: 'center', 
+      justifyContent: 'center', 
+      backgroundColor: '#000',
+      backgroundImage: "url('/bg.jpeg')",
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      position: 'relative'
+    }}>
+      {/* Overlay */}
+      <div style={{
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        backgroundColor: 'rgba(0,0,0,0.6)'
+      }}></div>
 
-          <form className="space-y-6" onSubmit={handleSubmit}>
+      {/* Login Card */}
+      <div style={{
+        position: 'relative',
+        zIndex: 10,
+        width: '100%',
+        maxWidth: '400px',
+        margin: '0 20px'
+      }}>
+        <div style={{
+          backgroundColor: 'rgba(255,255,255,0.1)',
+          backdropFilter: 'blur(10px)',
+          border: '1px solid rgba(255,255,255,0.2)',
+          borderRadius: '20px',
+          padding: '40px',
+          boxShadow: '0 25px 50px rgba(0,0,0,0.5)'
+        }}>
+          {/* Header */}
+          <div style={{ textAlign: 'center', marginBottom: '30px' }}>
+            <h1 style={{ 
+              fontSize: '2.5rem', 
+              fontWeight: 'bold', 
+              color: 'white', 
+              marginBottom: '10px' 
+            }}>
+              Welcome Back
+            </h1>
+            <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: '14px' }}>
+              Sign in to continue your conversations
+            </p>
+          </div>
+
+          {/* Form */}
+          <form onSubmit={handleSubmit}>
             {/* Username */}
-            <div>
-              <label className="block text-gray-300 mb-2">Username</label>
+            <div style={{ marginBottom: '20px' }}>
+              <label style={{ 
+                display: 'block', 
+                color: 'white', 
+                marginBottom: '8px', 
+                fontSize: '14px' 
+              }}>
+                Username
+              </label>
               <input
                 type="text"
                 name="username"
                 value={form.username}
                 onChange={handleChange}
                 placeholder="Enter your username"
-                className="w-full px-4 py-3 rounded-md bg-zinc-900 border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-600"
+                style={{
+                  width: '100%',
+                  padding: '12px 16px',
+                  borderRadius: '10px',
+                  backgroundColor: 'rgba(255,255,255,0.1)',
+                  border: errors.username ? '1px solid #ef4444' : '1px solid rgba(255,255,255,0.2)',
+                  color: 'white',
+                  fontSize: '16px',
+                  outline: 'none'
+                }}
+                disabled={loading}
               />
+              {errors.username && (
+                <p style={{ 
+                  color: '#ef4444', 
+                  fontSize: '12px', 
+                  marginTop: '4px' 
+                }}>
+                  {errors.username}
+                </p>
+              )}
             </div>
 
             {/* Password */}
-            <div>
-              <label className="block text-gray-300 mb-2">Password</label>
+            <div style={{ marginBottom: '20px' }}>
+              <label style={{ 
+                display: 'block', 
+                color: 'white', 
+                marginBottom: '8px', 
+                fontSize: '14px' 
+              }}>
+                Password
+              </label>
               <input
                 type="password"
                 name="password"
                 value={form.password}
                 onChange={handleChange}
                 placeholder="Enter your password"
-                className="w-full px-4 py-3 rounded-md bg-zinc-900 border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-600"
+                style={{
+                  width: '100%',
+                  padding: '12px 16px',
+                  borderRadius: '10px',
+                  backgroundColor: 'rgba(255,255,255,0.1)',
+                  border: errors.password ? '1px solid #ef4444' : '1px solid rgba(255,255,255,0.2)',
+                  color: 'white',
+                  fontSize: '16px',
+                  outline: 'none'
+                }}
+                disabled={loading}
               />
+              {errors.password && (
+                <p style={{ 
+                  color: '#ef4444', 
+                  fontSize: '12px', 
+                  marginTop: '4px' 
+                }}>
+                  {errors.password}
+                </p>
+              )}
             </div>
 
             {/* Login Button */}
             <button
               type="submit"
-              className="w-full py-3 rounded-md bg-red-600 hover:bg-red-700 transition font-semibold text-white mt-4"
+              disabled={loading}
+              style={{
+                width: '100%',
+                padding: '12px',
+                borderRadius: '10px',
+                backgroundColor: loading ? '#9ca3af' : '#dc2626',
+                color: 'white',
+                fontSize: '16px',
+                fontWeight: '600',
+                border: 'none',
+                cursor: loading ? 'not-allowed' : 'pointer',
+                marginBottom: '20px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '8px'
+              }}
             >
-              Login
+              {loading && (
+                <div style={{
+                  width: '16px',
+                  height: '16px',
+                  border: '2px solid rgba(255,255,255,0.3)',
+                  borderTop: '2px solid white',
+                  borderRadius: '50%',
+                  animation: 'spin 1s linear infinite'
+                }}></div>
+              )}
+              {loading ? 'Signing in...' : 'Sign In'}
             </button>
           </form>
 
-          <p className="text-gray-400 text-center mt-6">
-            Don't have an account?{" "}
-            <Link to="/signup" className="text-red-500 hover:underline">
-              Sign Up
-            </Link>
-          </p>
+          {/* Sign Up Link */}
+          <div style={{ 
+            textAlign: 'center', 
+            paddingTop: '20px', 
+            borderTop: '1px solid rgba(255,255,255,0.1)' 
+          }}>
+            <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: '14px' }}>
+              Don't have an account?{" "}
+              <Link 
+                to="/signup" 
+                style={{ 
+                  color: '#f87171', 
+                  textDecoration: 'none',
+                  fontWeight: '500'
+                }}
+              >
+                Create one now
+              </Link>
+            </p>
+          </div>
         </div>
       </div>
-
-      {/* Right: Background image */}
-      <div
-        className="hidden md:block md:w-1/2 bg-cover bg-center"
-        style={{
-          backgroundImage:
-            "url('https://wallpapers.com/images/featured/spiderman-cool-pictures-8pwp7g6c6np5azum.jpg')",
-        }}
-      ></div>
     </div>
   );
 };
