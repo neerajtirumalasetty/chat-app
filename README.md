@@ -42,25 +42,19 @@ A modern, real-time chat application built with React and Node.js featuring inst
 
 ### Setup
 
-1. **Clone the repository**
-   ```bash
-   git clone <your-repo-url>
-   cd Chat-App
-   ```
-
-2. **Install backend dependencies**
+1. **Install backend dependencies**
    ```bash
    cd backend
    npm install
    ```
 
-3. **Install frontend dependencies**
+2. **Install frontend dependencies**
    ```bash
    cd ../frontend
    npm install
    ```
 
-4. **Environment Setup**
+3. **Environment Setup**
    
    Create a `.env` file in the `backend` directory:
    ```env
@@ -69,7 +63,7 @@ A modern, real-time chat application built with React and Node.js featuring inst
    JWT_SECRET=your_super_secret_jwt_key_here
    ```
 
-5. **Start the application**
+4. **Start the application**
    
    **Terminal 1 - Backend:**
    ```bash
@@ -83,7 +77,7 @@ A modern, real-time chat application built with React and Node.js featuring inst
    npm run dev
    ```
 
-6. **Access the application**
+5. **Access the application**
    - Frontend: http://localhost:3000 (or the port shown in terminal)
    - Backend: http://localhost:5000
 
