@@ -10,7 +10,7 @@ const useGetConversations = () => {
 			setLoading(true);
 			try {
 				const token = JSON.parse(localStorage.getItem("chat-user"))?.token;
-				const res = await fetch("/api/users", {
+				const res = await fetch(`${import.meta.env.VITE_API_URL || ''}/api/users`, {
 					headers: {
 						"Authorization": `Bearer ${token}`,
 					},
