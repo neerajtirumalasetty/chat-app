@@ -1,8 +1,8 @@
-s# 💬 ChatApp - Real-Time Chat Application
+💬 ChatApp - Real-Time Chat Application
 
 A modern, real-time chat application built with React and Node.js featuring instant messaging, user authentication, and a beautiful dark-themed interface.
 
-![ChatApp Preview](https://via.placeholder.com/800x400/1a1a2e/ffffff?text=ChatApp+Preview)
+![ChatApp Preview]([https://chat-jy6zlhony-neerajtirumalasettys-projects.vercel.app/])
 
 ## ✨ Features
 
