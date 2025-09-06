@@ -97,7 +97,7 @@ A modern, real-time chat application built with React and Node.js featuring inst
 
 ## 🚀 Deployment
 
-### Option 1: Deploy to Vercel (Frontend) + Railway/Render (Backend)
+### Deploy to Vercel (Frontend) + Railway/Render (Backend)
 
 **Frontend (Vercel):**
 1. Push your code to GitHub
@@ -111,41 +111,6 @@ A modern, real-time chat application built with React and Node.js featuring inst
 3. Set start command: `cd backend && npm start`
 4. Add environment variables in the dashboard
 
-### Option 2: Deploy to Heroku
-
-1. **Install Heroku CLI**
-2. **Create Heroku apps:**
-   ```bash
-   # For backend
-   heroku create your-chat-app-backend
-   
-   # For frontend
-   heroku create your-chat-app-frontend
-   ```
-
-3. **Deploy backend:**
-   ```bash
-   cd backend
-   git subtree push --prefix backend heroku main
-   ```
-
-4. **Deploy frontend:**
-   ```bash
-   cd frontend
-   git subtree push --prefix frontend heroku main
-   ```
-
-### Option 3: Deploy to Netlify (Frontend) + Railway (Backend)
-
-**Frontend (Netlify):**
-1. Connect GitHub repo to Netlify
-2. Build command: `cd frontend && npm run build`
-3. Publish directory: `frontend/dist`
-
-**Backend (Railway):**
-1. Connect GitHub repo to Railway
-2. Set root directory to `backend`
-3. Add environment variables
 
 ## 🔧 Configuration
 
@@ -192,32 +157,5 @@ JWT_SECRET=your_super_secret_jwt_key_here_make_it_long_and_secure
 - Smooth animations
 - Intuitive navigation
 
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🙏 Acknowledgments
-
-- React team for the amazing framework
-- Socket.IO for real-time communication
-- MongoDB for the database
-- All the open-source contributors
-
-## 📞 Support
-
-If you have any questions or need help, please:
-- Open an issue on GitHub
-- Contact the development team
-- Check the documentation
-
----
 
 **Happy Chatting! 🎉**
